@@ -9,7 +9,7 @@ script to run.
 ./teamfixture.py list
 will provide a list of acceptable EPL names
 
-./teamfixture.py <team name>
+./teamfixture.py "EPL name"
 will provide current forthcoming fixtures for the team.
 
 To Do
