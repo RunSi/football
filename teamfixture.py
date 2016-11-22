@@ -3,7 +3,7 @@ __author__ = 'sihart'
 
 __author__ = 'sihart'
 
-import json, re, requests, pprint, sys
+import json, re, requests, sys
 from prettytable import PrettyTable
 #Pretty table information - https://code.google.com/archive/p/prettytable/wikis/Tutorial.wiki
 
