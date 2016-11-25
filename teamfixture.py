@@ -14,7 +14,6 @@ url = 'http://api.football-data.org/v1/soccerseasons/426/leagueTable'
 headers = { 'X-Auth-Token': APIKey, 'X-Response-Control': 'minified' }
 
 datepattern = re.compile(r'^(.*?)((19|20)\d\d)-((0|1)\d)-((0|1|2|3)?\d)T((\d\d:\d\d):\d\dZ)(.*?)$')
-datedict = {1:'January', 2:'February', 3:'March', 4:'April', 5:'May', 6:'June', 7:'July', 8:'August', 9:'September', 10:'October', 11:'November', 12:'December'}
 
 
 def mangledate(date):               #The date is in a rubbish format, so this function will make it more readable
@@ -22,12 +21,8 @@ def mangledate(date):               #The date is in a rubbish format, so this fu
     date1 = mo.group(0)
     date2 = date1[:10]
     new = datetime.datetime.strptime(date2, '%Y-%m-%d')
-    newdate = new.strftime('%d of %B')
-    #year = mo.group(2)
-    #month = mo.group(4)
-    #day = mo.group(6)
+    newdate = new.strftime('%a %d of %b')
     time = mo.group(9)
-    #newdate = day + ' ' + datedict[int(month)] + '  ' + year
     return newdate, time
 
 
