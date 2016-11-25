@@ -77,14 +77,21 @@ x.align["Home Team"]="l"
 x.align["AwayTeam"]="l"
 
 print('Upcoming Fixtures - \n')
-for i in range(count):              #iterate over fixtures
-    finish = (fixtures[i]['status'])
+#for i in range(count):              #iterate over fixtures
+ #   finish = (fixtures[i]['status'])
+for i, item in enumerate(fixtures):
+    finish = (item['status'])
     if finish == 'FINISHED':        #if the status key is FINISHED then ignore
         continue
     else:                           #populate the table with fixtures which do not have a status of FINISHED
-        date1 = (fixtures[i]['date'])
-        hometeam = fixtures[i]['homeTeamName']
-        awayteam = fixtures[i]['awayTeamName']
+        date1 = (item['date'])
+        hometeam = (item['homeTeamName'])
+        awayteam = (item['awayTeamName'])
+
+
+        #date1 = (fixtures[i]['date'])
+        #hometeam = fixtures[i]['homeTeamName']
+        #awayteam = fixtures[i]['awayTeamName']
         x.add_row([hometeam, "v", awayteam, convertdate(date1)[0],convertdate(date1)[1]])
         x.add_row(["","","","",""])
 
