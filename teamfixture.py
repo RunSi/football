@@ -13,16 +13,15 @@ APIKey = '76f8d5e93e754aa0b89701f0c95c368c'  #API Key obtained from api.football
 url = 'http://api.football-data.org/v1/soccerseasons/426/leagueTable'
 headers = { 'X-Auth-Token': APIKey, 'X-Response-Control': 'minified' }
 
-datepattern = re.compile(r'^(.*?)((19|20)\d\d)-((0|1)\d)-((0|1|2|3)?\d)T((\d\d:\d\d):\d\dZ)(.*?)$')
+datepattern = re.compile(r'^(.*?)(((19|20)\d\d)-((0|1)\d)-((0|1|2|3)?\d))T((\d\d:\d\d):\d\dZ)(.*?)$')
 
 
-def mangledate(date):               #The date is in a rubbish format, so this function will make it more readable
+def convertdate(date):               #The date is in a rubbish format, so this function will make it more readable
     mo = datepattern.search(date)
-    date1 = mo.group(0)
-    date2 = date1[:10]
-    new = datetime.datetime.strptime(date2, '%Y-%m-%d')
+    date1 = mo.group(2)
+    new = datetime.datetime.strptime(date1, '%Y-%m-%d')
     newdate = new.strftime('%a %d of %b')
-    time = mo.group(9)
+    time = mo.group(10)
     return newdate, time
 
 
@@ -86,7 +85,7 @@ for i in range(count):              #iterate over fixtures
         date1 = (fixtures[i]['date'])
         hometeam = fixtures[i]['homeTeamName']
         awayteam = fixtures[i]['awayTeamName']
-        x.add_row([hometeam, "v", awayteam, mangledate(date1)[0],mangledate(date1)[1]])
+        x.add_row([hometeam, "v", awayteam, convertdate(date1)[0],convertdate(date1)[1]])
         x.add_row(["","","","",""])
 
 
