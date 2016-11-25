@@ -3,7 +3,7 @@ __author__ = 'sihart'
 
 __author__ = 'sihart'
 
-import json, re, requests, sys
+import json, re, requests, sys, datetime
 from prettytable import PrettyTable
 #Pretty table information - https://code.google.com/archive/p/prettytable/wikis/Tutorial.wiki
 
@@ -19,11 +19,15 @@ datedict = {1:'January', 2:'February', 3:'March', 4:'April', 5:'May', 6:'June', 
 
 def mangledate(date):               #The date is in a rubbish format, so this function will make it more readable
     mo = datepattern.search(date)
-    year = mo.group(2)
-    month = mo.group(4)
-    day = mo.group(6)
+    date1 = mo.group(0)
+    date2 = date1[:10]
+    new = datetime.datetime.strptime(date2, '%Y-%m-%d')
+    newdate = new.strftime('%d of %B')
+    #year = mo.group(2)
+    #month = mo.group(4)
+    #day = mo.group(6)
     time = mo.group(9)
-    newdate = day + ' ' + datedict[int(month)] + '  ' + year
+    #newdate = day + ' ' + datedict[int(month)] + '  ' + year
     return newdate, time
 
 
@@ -41,15 +45,18 @@ club = ' '.join(sys.argv[1:])   #club variable used to identify teamId.  Join us
 response = requests.get(url, headers=headers) #Retrieve JSON data for the EPL table, this will provide teamId data.
 response.raise_for_status()
 
-footdata = json.loads(response.text)  #parse JSON into strings and dicts.
+footdata =  response.json()#json.loads(response.text)  #parse JSON into strings and dicts.
 teamdata = footdata['standing'] #teamdata will contain the dictionary value for Standing. This value is all 20 EPL teams
 count1 = len(teamdata) #should count to 20
 
-for i in range(count1):             #iterate over Standing value to look for a match between variable club with
-    teamname = (teamdata[i]['team'])
+#for i in range(count1):             #iterate over Standing value to look for a match between variable club with
+ #   teamname = (teamdata[i]['team'])
+  #  if teamname == club:
+   #     Id = (teamdata[i]['teamId'])    #if club and teamname match then invoke variable Id to equal teamId
+for i, item in enumerate(teamdata):  #thanks to apic-em script, still not sure how it works
+    teamname = (item['team'])
     if teamname == club:
-        Id = (teamdata[i]['teamId'])    #if club and teamname match then invoke variable Id to equal teamId
-
+        Id = (item['teamId'])
 
 
 # Next part
