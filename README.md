@@ -1,18 +1,17 @@
-# teamfixture.py
+ Comp_fixtures2.py
 
-This small python script will grab data from api.football-data.org and will display
-forthcoming fixtures of the 2016/2017 premier league season.
+This small python script will grab data from api.football-data.org and display forthcoming fixtures
+for 15 European Leagues
 
 Python 3.x and dependencies are 'requests' and 'prettytable'.  These modules will need to be installed for the
 script to run.
 
-./teamfixture.py list
-will provide a list of acceptable EPL names
+Two files are required
 
-./teamfixture.py "EPL name"
-will provide current forthcoming fixtures for the team.
+Comp_fixtures2.py - main program
+getfooty.py - function for grabbing api data
 
-To Do
-Add previous results
-Add league position
-Make code a bit more elegant
+The code is a little more elegant than the previous league script, but still needs some work.
+
+Operation is pretty self explanatory, just run python3 Comp_fixtures2.py
+
