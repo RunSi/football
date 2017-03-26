@@ -22,6 +22,9 @@ def main():
         new = datetime.datetime.strptime(date1, '%Y-%m-%d')
         newdate = new.strftime('%a %d of %b')
         time = mo.group(10)
+        time = datetime.datetime.strptime(time, '%H:%M')
+        time = time + datetime.timedelta(hours=1, minutes=0)
+        time = time.strftime('%H:%M')
         return newdate, time
 
 
